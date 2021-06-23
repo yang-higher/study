@@ -1,4 +1,4 @@
-# 1、遇到的问题
+# 1、git使用记录
 
 ### 1、本地已经关联github的项目（此项目)如何推送到gitee?
 
@@ -33,5 +33,13 @@ $ git remote add m https://gitee.com/yang-ruyi/study.git
 git push m
 ```
 
-   
+## 2、git推送代码
+
+##### ① git add .
+
+##### ② git commit -m "提交描述"
+
+##### ③ git push
+
+
 

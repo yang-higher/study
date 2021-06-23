@@ -1,12 +1,12 @@
 package com.ry.springcloud.controller;
 
-import com.netflix.discovery.DiscoveryClient;
 import com.ry.springcloud.entities.CommonResult;
 import com.ry.springcloud.entities.Payment;
 import com.ry.springcloud.service.PaymentService;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.cloud.client.ServiceInstance;
+import org.springframework.cloud.netflix.eureka.EurekaDiscoveryClient;
 import org.springframework.web.bind.annotation.*;
 
 import javax.annotation.Resource;
@@ -22,7 +22,7 @@ import java.util.Objects;
 @Slf4j
 public class PaymentController {
     @Resource
-    private DiscoveryClient discoveryClient;
+    private EurekaDiscoveryClient discoveryClient;
     @Resource
     private PaymentService paymentService;
     @Value("${server.port}")
@@ -48,18 +48,18 @@ public class PaymentController {
         return new CommonResult(444, "failed");
     }
 
-//    @GetMapping(value = "/payment/discovery")
-//    public Object discovery() {
-//        List<String> services = discoveryClient.getServices();
-//        for (String element : services) {
-//            log.info("*****element: " + element);
-//        }
-//        List<ServiceInstance> instances = discoveryClient.getInstances("CLOUD-PAYMENT-SERVICE");
-//        for (ServiceInstance instance : instances) {
-//
-//            log.info(instance.getServiceId() + "\t" + instance.getHost() + "\t" + instance.getPort() + "\t" + instance.getUri());
-//        }
-//
-//        return this.discoveryClient;
-//    }
+   @GetMapping(value = "/payment/discovery")
+   public Object discovery() {
+       List<String> services = discoveryClient.getServices();
+       for (String element : services) {
+           log.info("*****element: " + element);
+       }
+       List<ServiceInstance> instances = discoveryClient.getInstances("CLOUD-PAYMENT-SERVICE");
+       for (ServiceInstance instance : instances) {
+
+           log.info(instance.getServiceId() + "\t" + instance.getHost() + "\t" + instance.getPort() + "\t" + instance.getUri());
+       }
+
+       return this.discoveryClient;
+   }
 }
